@@ -19,7 +19,7 @@ puppet-this https://github.com/fisknils/puppet-this-cli -f ./my-scripts/get-gith
 ```
 
 ## Installation
-```npm -g i https://github.com/fisknils/puppet-this-cli.git```
+```npm -g i puppet-this```
 
 ## License
 uhmm.. MIT I guess? do whatever you want with it!
