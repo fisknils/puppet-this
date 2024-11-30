@@ -1,0 +1,1 @@
+return [...document.querySelectorAll('a[href]')].map( a => a.href ).join("\n");

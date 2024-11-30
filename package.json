@@ -1,6 +1,6 @@
 {
   "name": "puppet-this",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "type": "module",
   "bin": {
     "puppet-this": "./cli.js"
