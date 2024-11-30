@@ -15,7 +15,8 @@ puppet-this https://github.com/fisknils/puppet-this-cli \
 
 ### Using --file
 ```bash
-puppet-this https://github.com/fisknils/puppet-this-cli -f ./my-scripts/get-github-stars.js
+puppet-this https://github.com/fisknils/puppet-this-cli \
+    -f ./my-scripts/get-github-stars.js
 ```
 
 ## Installation
