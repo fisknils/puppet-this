@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import puppeteer from 'puppeteer';
 import fs from 'fs';
 import { Command } from 'commander';
@@ -69,7 +71,7 @@ function setupCommand() {
     program
         .name('puppeteer-script-runner')
         .description('Evaluate a .js script on a webpage using Puppeteer')
-        .version('1.0.0')
+        .version('1.0.2')
         .option('-f, --scriptFile <scriptFile>', 'Path to the .js script to evaluate')
         .option('-s, --script <script>', 'The script to evaluate')
         .arguments('<url>')
@@ -110,8 +112,8 @@ function setupCommand() {
 
         await navigateToPage(page, url, spinner);
         const result = await evaluateScript(page, scriptContent, spinner);
-        
         await browser.close();
+
         console.log(chalk.yellow(result));
 
         rimraf.sync(userDataDir);
