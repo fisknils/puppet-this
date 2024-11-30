@@ -24,3 +24,7 @@ puppet-this https://github.com/fisknils/puppet-this-cli \
 
 ## License
 uhmm.. MIT I guess? do whatever you want with it!
+
+## Links
+- [GitHub Repository](https://github.com/fisknils/puppet-this-cli)
+- [NPM Package](https://npmjs.com/package/puppet-this)
