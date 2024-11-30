@@ -4,7 +4,7 @@ Puppet This is a very simple command-line tool designed to automate extracting s
 That's where puppeteer comes in handy.
 This tool provides a quick way of throwing puppeteer at a URL, injecting a javscript and logging what's returned.
 
-This is useful for scraping data from websites, automating tasks, or testing web pages.
+This is useful for scraping small bits of data from specific pages of websites for testing or comparison.
 
 ## Example usage
 ### Using --script
