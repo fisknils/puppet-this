@@ -71,7 +71,7 @@ function setupCommand() {
     program
         .name('puppeteer-script-runner')
         .description('Evaluate a .js script on a webpage using Puppeteer')
-        .version('1.0.2')
+        .version('1.0.3')
         .option('-f, --scriptFile <scriptFile>', 'Path to the .js script to evaluate')
         .option('-s, --script <script>', 'The script to evaluate')
         .arguments('<url>')
