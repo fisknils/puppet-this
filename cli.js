@@ -45,6 +45,7 @@ async function evaluateScript(page, scriptContent, spinner) {
     spinner.start(chalk.blue('Evaluating script on the page...'));
     const result = await page.evaluate(new Function(scriptContent));
     spinner.succeed(chalk.green('Script evaluated.'));
+
     return result;
 }
 
@@ -71,7 +72,7 @@ function setupCommand() {
     program
         .name('puppeteer-script-runner')
         .description('Evaluate a .js script on a webpage using Puppeteer')
-        .version('1.0.3')
+        .version('1.0.4')
         .option('-f, --scriptFile <scriptFile>', 'Path to the .js script to evaluate')
         .option('-s, --script <script>', 'The script to evaluate')
         .arguments('<url>')
