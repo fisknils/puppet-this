@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import puppeteer from 'puppeteer';
 import fs from 'fs';
 import { Command } from 'commander';
@@ -110,8 +112,8 @@ function setupCommand() {
 
         await navigateToPage(page, url, spinner);
         const result = await evaluateScript(page, scriptContent, spinner);
-        
         await browser.close();
+        
         console.log(chalk.yellow(result));
 
         rimraf.sync(userDataDir);
