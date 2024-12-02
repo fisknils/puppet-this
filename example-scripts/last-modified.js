@@ -1,1 +1,1 @@
-return document.lastModified;
+return 'last modified: ' + document.lastModified;

@@ -1,29 +1,31 @@
 # Puppet This
-Puppet This is a very simple command-line tool designed to automate extracting stuff from webpages, where everyones favourite (curl + sed) might be a bit cumbersome, or impossible because it's changed onload.
+Puppet This is a very simple command-line tool designed to automate extracting stuff from webpages, where everyone's favorite (curl + sed) might be a bit cumbersome.
 
 That's where puppeteer comes in handy.
-This tool provides a quick way of throwing puppeteer at a URL, injecting a javscript and logging what's returned.
 
-This is useful for scraping small bits of data from specific pages of websites for testing or comparison.
+While there's many good (better) libraries for scraping data with puppeteer already, this tool is designed to let you quickly hack together small scripts without having to set up a full project to do so.
+
+Maybe you're just obsessive about writing scripts in the command line, or maybe you want a quick way of finding out when a product is back in stock on your favorite webshop. 
+How should I know? I've never even met you.
 
 ## Example usage
-### Using --script
+### Using -s
 ```bash
 puppet-this https://github.com/fisknils/puppet-this-cli \
-    --script "return document.querySelector('#repo-stars-counter-star').innerText;"
+    -s ./example-scripts/get-github-stars.js
 ```
 
-### Using --file
+### Evaluating multiple scripts -s
 ```bash
 puppet-this https://github.com/fisknils/puppet-this-cli \
-    -f ./my-scripts/get-github-stars.js
+    -s ./example-scripts/get-github-stars.js,./example-scripts/last-modified.js
 ```
 
 ## Installation
 ```npm -g i puppet-this```
 
 ## License
-uhmm.. MIT I guess? do whatever you want with it!
+do whatever you want with it!
 
 ## Links
 - [GitHub Repository](https://github.com/fisknils/puppet-this-cli)

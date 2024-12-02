@@ -62,12 +62,12 @@ async function takeScreenshot(page, screenshotPath) {
  * @returns {string[]} - Script content.
  */
 function readScriptContent(options) {
-    if ( ! options.scriptFiles ) return [];
+    if ( ! options.scripts ) return [];
 
-    return options.scriptFiles.split(',').map((scriptFile) => {
+    return options.scripts.split(',').map((scriptFile) => {
         if (!fs.existsSync(scriptFile)) {
-            console.error(`Script file not found: ${scriptFile}`);
-            process.exit(1);
+            console.error(`Script not found: ${scriptFile}`);
+            return '';
         }
         return fs.readFileSync(scriptFile, 'utf8');
     });
@@ -80,7 +80,7 @@ function readScriptContent(options) {
 async function main(options) {
     const rimraf = await import('rimraf');
 
-    if (!options.scriptFiles && !options.interactive && !options.screenshot) {
+    if (!options.scripts && !options.interactive && !options.screenshot) {
         console.error('One (or more) of --scriptFiles, --interactive, or --screenshot option must be provided.');
         process.exit(1);
     }
@@ -96,7 +96,7 @@ async function main(options) {
         await navigateToPage(page, url);
 
         const result = await (async () => {
-            return await Promise.all(scriptContent.map( script => evaluateScript(page, script) ));
+            return (await Promise.all(scriptContent.map( script => evaluateScript(page, script) ))).join('\n');
         })();
 
         if (options.screenshot) {
