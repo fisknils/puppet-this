@@ -20,6 +20,7 @@ function parseOptions() {
         .option('-o, --screenshot <screenshotPath>', 'Grab a screenshot of the page')
         .option('-i, --interactive', 'Open an interactive non-headless Puppeteer window')
         .option('-c, --cleanup', 'Delete the user data directory after the script finishes')
+        .option('-q, --quiet', 'Suppress spinner output')
         .arguments('<url>')
         .action((url) => {
             program.url = url;

@@ -8,7 +8,7 @@ While there's many good (better) libraries for scraping data with puppeteer alre
 Maybe you're just obsessive about writing scripts in the command line, or maybe you want a quick way of finding out when a product is back in stock on your favorite webshop. 
 How should I know? I've never even met you.
 
-## Example usage
+## Example CLI usage
 ```bash
 puppet-this https://github.com/fisknils/puppet-this-cli \
     -s ./example-scripts/get-github-stars.js
