@@ -40,3 +40,7 @@ do whatever you want with it!
 ## Links
 - [GitHub Repository](https://github.com/fisknils/puppet-this-cli)
 - [NPM Package](https://npmjs.com/package/puppet-this)
+
+## Footnote
+In all honesty, I can't imagine this will be of any real use to anyone.
+I'm just trying to fall in love with coding again.
