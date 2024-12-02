@@ -9,16 +9,26 @@ Maybe you're just obsessive about writing scripts in the command line, or maybe 
 How should I know? I've never even met you.
 
 ## Example usage
-### Using -s
 ```bash
 puppet-this https://github.com/fisknils/puppet-this-cli \
     -s ./example-scripts/get-github-stars.js
 ```
 
-### Evaluating multiple scripts -s
+### Evaluating multiple scripts
 ```bash
 puppet-this https://github.com/fisknils/puppet-this-cli \
     -s ./example-scripts/get-github-stars.js,./example-scripts/last-modified.js
+```
+
+### Grabbing a screenshot
+```bash
+puppet-this https://github.com/fisknils/puppet-this-cli \
+    -o ./screenshot.png
+```
+
+### Open a browser window for manual inspection (or clicking away those nasty cookie popups for consequent runs)
+```bash
+    puppet-this https://github.com/fisknils/puppet-this-cli -i
 ```
 
 ## Installation
