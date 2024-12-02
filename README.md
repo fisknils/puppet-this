@@ -42,5 +42,5 @@ do whatever you want with it!
 - [NPM Package](https://npmjs.com/package/puppet-this)
 
 ## Footnote
-In all honesty, I can't imagine this will be of any real use to anyone.
+In all honesty, I can't imagine this will be of much use to anyone.
 I'm just trying to fall in love with coding again.
