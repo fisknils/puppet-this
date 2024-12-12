@@ -8,7 +8,19 @@ While there's many good (better) libraries for scraping data with puppeteer alre
 Maybe you're just obsessive about writing scripts in the command line, or maybe you want a quick way of finding out when a product is back in stock on your favorite webshop. 
 How should I know? I've never even met you.
 
-## Example CLI usage
+## Options
+```javascript
+('puppet-this')
+    .description('Evaluate a .js script on a webpage using Puppeteer')
+    .option('-sp, --scriptedPage <path to script>', 'This custom script will be evaluated outside of the browser sandbox, given a handle of the Page object.')
+    .option('-s, --scripts <path to scripts>', 'Comma separated list of .js script files to evaluate')
+    .option('-o, --screenshot <screenshotPath>', 'Grab a screenshot of the page')
+    .option('-i, --interactive', 'Open an interactive non-headless Puppeteer window')
+    .option('-c, --cleanup', 'Delete the user data directory after the script finishes')
+    .option('-q, --quiet', 'Suppress spinner output')
+    .arguments('<url>', 'URL to target (required)')
+```
+
 ```bash
 puppet-this https://github.com/fisknils/puppet-this-cli \
     -s ./example-scripts/get-github-stars.js

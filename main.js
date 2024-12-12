@@ -4,7 +4,29 @@ import os from 'os';
 import path from 'path';
 import ora from 'ora';
 import chalk from 'chalk';
-const spinner = ora();
+import { writeHeapSnapshot } from 'v8';
+
+/**
+ * @param {quiet: boolean} options 
+ * @returns {Logger} Logger Instance
+ */
+function Logger( {quiet} ) {
+    const devnull = () => {};
+    const oraInstance = (!quiet) ? ora() : null;
+
+    this.log = ( what, ...args ) => {
+        if ( quiet ) return;
+        if ( ! [ 'start', 'info', 'debug'].includes(what) ) return;
+
+        return oraInstance[what](...args);
+    }
+
+    this.start = (...args) => this.log('start', args);
+    this.info = (...args) => this.log('info', args);
+    this.fail = (...args) => this.log('fail', args);
+    
+    return this;
+}
 
 /**
  * Launches a Puppeteer browser instance.
@@ -14,9 +36,9 @@ const spinner = ora();
  * @returns {Promise<puppeteer.Browser>}
  */
 async function launchBrowser(userDataDir, headless = true, quiet = false) {
-    if (!quiet) spinner.start(chalk.blue('Launching browser...'));
+    Logger.start('Launching browser...')
     const browser = await puppeteer.launch({ userDataDir, headless });
-    if (!quiet) spinner.succeed(chalk.green('Browser launched.'));
+    Logger.succeed('Browser Launched!')
     return browser;
 }
 
@@ -28,9 +50,9 @@ async function launchBrowser(userDataDir, headless = true, quiet = false) {
  * @returns {Promise<void>}
  */
 async function navigateToPage(page, url, quiet = false) {
-    if (!quiet) spinner.start(chalk.blue(`Navigating to ${url}...`));
+    Logger.start(`Navigating to ${url}...`);
     await page.goto(url, { waitUntil: 'networkidle0' });
-    if (!quiet) spinner.succeed(chalk.green(`Navigated to ${url}.`));
+    Logger.succeed(`Navigated to ${url}.`);
 }
 
 /**
@@ -41,9 +63,13 @@ async function navigateToPage(page, url, quiet = false) {
  * @returns {Promise<any>}
  */
 async function evaluateScript(page, scriptContent, quiet = false) {
-    if (!quiet) spinner.start(chalk.blue('Evaluating script on the page...'));
-    const result = await page.evaluate(new Function(scriptContent));
-    if (!quiet) spinner.succeed(chalk.green('Script evaluated.'));
+    Logger.start('Evaluating script on the page...')
+    
+    const result = await page.evaluate(new Function(scriptContent))
+        .catch( e => Logger.error( e.message ) );
+    
+    Logger.succeed('Script evaluated.');
+
     return result;
 }
 
@@ -55,9 +81,25 @@ async function evaluateScript(page, scriptContent, quiet = false) {
  * @returns {Promise<void>}
  */
 async function takeScreenshot(page, screenshotPath, quiet = false) {
+    const [
+        screenPath,  // (out) Screenshot path
+        comparePath, // (in) Compare Screenshot above with this file (if it is passed)
+        diffPath     // (out) Generate a diff- image from the new screenshot and the comparison one.
+    ] = screenshotPath.split(',');
+
     if (!quiet) spinner.start(chalk.blue('Taking screenshot...'));
-    await page.screenshot({ path: screenshotPath, fullPage: true });
-    if (!quiet) spinner.succeed(chalk.green(`Screenshot saved to ${screenshotPath}.`));
+    await page.screenshot({ path: screenPath, fullPage: true });
+    if (!quiet) spinner.succeed(chalk.green(`Screenshot saved to ${screenPath}.`));
+
+    if (comparePath) {
+
+        const resembleResult = new Promise( async resolve => {
+            await import('resemblejs').compare(
+                screenPath,
+                comparePath
+            ).onComplete( result => resolve )
+        })
+    }
 }
 
 /**
